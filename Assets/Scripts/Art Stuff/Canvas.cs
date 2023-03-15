@@ -319,10 +319,9 @@ public class Canvas : MonoBehaviour
                     _tempChunkMask.Add(new UnsafeList<UINTColor32>((UINTColor32*) tempChunkMaskData.GetUnsafePtr() + k,
                         splitAmount));
                 }
-                /*tempChunkData.Dispose();
-                tempChunkMaskData.Dispose();
-                chunkData.Dispose();*/
-                //chunkData.Dispose();
+
+                tempChunkData.Dispose();
+                chunkData.Dispose();
             }
 
             paintToRealJob = new PaintToRealJob()
@@ -423,7 +422,7 @@ public class Canvas : MonoBehaviour
                 UINTColor32 newColor = Color;
                 UINTColor32 tempColor = tempChunkPixel[j];
 
-                newColor.SetRGBA(PR3AlphaCombine(tempColor.Rgba, realChunkPixel[j].Rgba));
+                newColor.SetRGBA(CombineColors(tempColor.Rgba, realChunkPixel[j].Rgba));
 
                 UINTColor32 prev = new UINTColor32();
                 prev.SetRGBA((realChunkPixel[j].Rgba & ~tempChunkMask[j].Rgba));
@@ -440,7 +439,7 @@ public class Canvas : MonoBehaviour
             realChunkPixel.Dispose();
         }
 
-        uint PR3AlphaCombine(uint color, uint oldColor)
+        uint CombineColors(uint color, uint oldColor)
         {
             float oldAlphaAmount = (oldColor >> 24 & 255) / 255f;
             

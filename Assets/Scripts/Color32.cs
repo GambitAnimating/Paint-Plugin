@@ -264,8 +264,6 @@
         public static implicit operator UINTColor32(Color c) => new UINTColor32((byte) Mathf.Round(Mathf.Clamp01(c.r) * (float) byte.MaxValue), (byte) Mathf.Round(Mathf.Clamp01(c.g) * (float) byte.MaxValue), (byte) Mathf.Round(Mathf.Clamp01(c.b) * (float) byte.MaxValue), (byte) Mathf.Round(Mathf.Clamp01(c.a) * (float) byte.MaxValue));
         
         public static implicit operator UINTColor32(Color32 c) => new UINTColor32(c.r, c.g, c.b, c.a);
-        
-        public static implicit operator UINTColor32(Color32ARGB c) => new UINTColor32(c.r, c.g, c.b, c.a);
-        
+
         public static implicit operator Color(UINTColor32 c) => new Color((float) c.r / (float) byte.MaxValue, (float) c.g / (float) byte.MaxValue, (float) c.b / (float) byte.MaxValue, (float) c.a / (float) byte.MaxValue);
     }
